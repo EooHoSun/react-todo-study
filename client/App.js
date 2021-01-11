@@ -15,16 +15,25 @@ import {Regist} from './components/view/regist/Regist';
 
 
 const Main = ({navigation}) => {
-  const [state, dispatch] = useReducer(reducer, {todos:[]});
+  const [state, dispatch] = useReducer(reducer, {todos:[],auth:false});
   const handleTodos = async () => {
     const {data} = await axios.get('http://192.168.0.7:4000/api/todos/retrieve')
     if(data.result) dispatch({type:"INIT_TODO", todos : data.todos});
   };
+  const getAuth = async () => {
+    const {data:{result}} = await axios.get('http://192.168.0.7:4000/api/user/auth');
+    if(!result) {
+      console.log('인증결과 : ' + result);
+      navigation.navigate('Login');
+    }
+    dispatch({typd:"AUTH", auth : result});
+  }
   useEffect(() => {
+    getAuth();
     handleTodos();
   },[]);
   return (
-    <TodosContext.Provider value={{todos:state.todos, dispatch}}>
+    <TodosContext.Provider value={{todos:state.todos, dispatch,auth:state.auth}}>
       <View style={styles.container}>
         <Input navigation={navigation}/>
         <Todos todos={state.todos}/>
@@ -38,10 +47,10 @@ const Main = ({navigation}) => {
 const Stack = createStackNavigator();
 
 export default function App(){
-    const [auth, setAuth] = useState();
+    const [root, setRoot] = useState();
     const getAuth = async () => {
       const {data} = await axios.get('http://192.168.0.7:4000/api/user/auth');
-      setAuth(data.result);
+      setRoot(data.result?'Home':'Login');
     }
     useEffect(()=>{
       getAuth();
@@ -49,10 +58,10 @@ export default function App(){
 
     return (
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Main" component={Main} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="AddUser" component={Regist} />
+        <Stack.Navigator initialRouteName={root}>
+          <Stack.Screen name="Login" component={Login}/>
+          <Stack.Screen name="Main" component={Main}/>
+          <Stack.Screen name="AddUser" component={Regist}/>
         </Stack.Navigator>
       </NavigationContainer>
       

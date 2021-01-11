@@ -81,9 +81,19 @@ app.post('/api/users/login', (req, res) => {
             
             user.generateToken((err, doc)=>{
                 if(err || !doc) return res.cookie('x_auth','').json(loginMsg.err);
-                return res.cookie('x_auth',doc.token)
-                .status(200)
-                .json(loginMsg.success);
+                else {
+                    console.log(`[${user.id}] 로그인 + ${new Date()}`);
+                    setTimeout(() => {
+                        user.removeToken((err, doc) => {
+                            if(err) console.log(user.id + " 의 토큰 삭제처리 오류발생");
+                            else console.log(`[${user.id}] 토큰 시간 종료`);
+                        });
+                    }, 600000);
+
+                    return res.cookie('x_auth',doc.token)
+                    .status(200)
+                    .json(loginMsg.success);
+                } 
             });
         } 
     });

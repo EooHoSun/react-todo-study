@@ -27,14 +27,19 @@ const reducer = (state, action) => {
         }
         return {
           todos : _todos
-        }
+        };
+      case 'AUTH' : 
+        return {
+          auth : action.auth
+        };
       default:
         return state;
     }
   }
   const TodosContext = createContext({
     todos:[],
-    dispatch:null
+    dispatch:null,
+    auth:false
   });
 
   export {reducer,TodosContext};

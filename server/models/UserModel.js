@@ -32,5 +32,14 @@ userSchema.methods.generateToken = function(callbackFn){
 
 };
 
+userSchema.methods.removeToken = function(callbackFn){
+    const user = this;
+    user.token = "";
+    user.save((err, doc) => {
+        if(err) return callbackFn(err);
+        callbackFn(null,doc);
+    });
+};
+
 const User = mongoose.model('Users',userSchema);
 module.exports = {User};
