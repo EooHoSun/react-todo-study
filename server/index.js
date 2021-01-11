@@ -74,17 +74,16 @@ app.post('/api/users/login', (req, res) => {
     console.log(id, pwd);
     
     User.findOne({id}, (err, user) => {
-        if(err) return res.json(loginMsg.err);
-        else if(!user) return res.json(loginMsg.idNotFound);
-        else if(user.password !== pwd) return res.json(loginMsg.passwordIncollect);
+        if(err) return res.cookie('x_auth','').json(loginMsg.err);
+        else if(!user) return res.cookie('x_auth','').json(loginMsg.idNotFound);
+        else if(user.password !== pwd) return res.cookie('x_auth','').json(loginMsg.passwordIncollect);
         else if(user.password === pwd){
             
             user.generateToken((err, doc)=>{
-                if(err) return res.json(loginMsg.err);
+                if(err || !doc) return res.cookie('x_auth','').json(loginMsg.err);
                 return res.cookie('x_auth',doc.token)
                 .status(200)
                 .json(loginMsg.success);
-
             });
         } 
     });
@@ -103,8 +102,10 @@ app.get('/api/users/logout', (req,res) => {
                 .status(200)
                 .json({result : true, msg:"로그아웃 완료"});
             });
+        } else {
+
+            return res.cookie('x_auth','').json({result : true, msg:"로그아웃 완료"});
         }
-        return res.cookie('x_auth','').json({result : true, msg:"로그아웃 완료"});
 });
 
 
@@ -134,7 +135,7 @@ app.get('/api/todos/delete',auth,(req, res) => {
     Todos.findOneAndDelete({id}, (err, doc) => {
         if(err) return res.json({result : false, msg : '오류발생'});
         if(!doc) return res.json({result : false, msg : 'todo가 없습니다.'});
-        return res.status(200).json({result : true, msg: '삭제완료'});
+        return res.status(200).json({result : true, msg: '삭제완료',todo : doc});
     });
 });
 
