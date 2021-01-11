@@ -4,11 +4,11 @@ import axios from 'axios';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {reducer,TodosContext} from './TodoDispatcher';
-import {Input} from './Input';
-import {Login} from './Login';
-import {Todos} from './Todos';
-import {Footer} from './Footer';
-import {styles} from './styles';
+import {Input} from './components/view/main/input/Input';
+import {Login} from './components/view/login/Login';
+import {Todos} from './components/view/main/todos/Todos';
+import {Footer} from './components/view/main/footer/Footer';
+import {styles} from './components/style/styles';
 
 
 

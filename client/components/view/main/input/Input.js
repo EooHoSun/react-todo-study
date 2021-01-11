@@ -2,8 +2,8 @@ import React,{ useState,useContext } from 'react';
 import {View, TextInput, Alert } from 'react-native';
 import axios from 'axios';
 import { AntDesign} from '@expo/vector-icons';
-import {TodosContext} from './TodoDispatcher';
-import {styles} from './styles';
+import {TodosContext} from '../../../../TodoDispatcher';
+import {styles} from '../../../style/styles';
 
 const Input = () => {
   const [desc, setDesc] = useState('');

@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import axios from 'axios';
-import {styles} from './styles';
+import {styles} from '../../../style/styles';
 
 const Footer = ({navigation}) => {
   const logoutHandler = async () => {

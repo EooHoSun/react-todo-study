@@ -1,8 +1,8 @@
 import React, {useContext } from 'react';
 import {SafeAreaView , FlatList } from 'react-native';
-import {TodosContext} from './TodoDispatcher';
-import {styles} from './styles';
-import {Todo} from './Todo';
+import {TodosContext} from '../../../../TodoDispatcher';
+import {styles} from '../../../style/styles';
+import {Todo} from '../todo/Todo';
 
 const Todos = () => {
   const {todos} = useContext(TodosContext);

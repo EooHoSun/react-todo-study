@@ -21,9 +21,9 @@ const reducer = (state, action) => {
         const idx =_todos.findIndex(todo=>{return todo.id === action.todo.id});
         if(idx !== -1){
           _todos.splice(idx,1,JSON.parse(JSON.stringify(action.todo)));
-          console.log(state.todos);
-          console.log('====');
-          console.log(_todos);
+        //   console.log(state.todos);
+        //   console.log('====');
+        //   console.log(_todos);
         }
         return {
           todos : _todos

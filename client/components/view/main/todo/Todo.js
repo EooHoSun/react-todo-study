@@ -1,20 +1,21 @@
 import React,{ useState, useContext } from 'react';
 import { Text, View} from 'react-native';
 import { Ionicons,FontAwesome5 } from '@expo/vector-icons';
-import {styles} from './styles';
-import {TodosContext} from './TodoDispatcher';
+import {styles} from '../../../style/styles';
+import {TodosContext} from '../../../../TodoDispatcher';
 import axios from 'axios';
 
 const Todo = ({todo}) => {
   const [outLine,setOutLine] = useState(todo.item.completed ? "checkmark-circle-outline" :"checkmark-circle");
   const {dispatch} = useContext(TodosContext);
-
   const completedHandler = async () => {
     const {id, desc, due_date} = todo.item;
     const completed = !todo.item.completed;
     const {data} = await axios.post('http://192.168.0.7:4000/api/todos/modify',{id, desc, due_date, completed});
-    if(data.result) dispatch({type:'MODIFY_TODO', todo:data.todo});
-    setOutLine(data.todo? "checkmark-circle-outline" :"checkmark-circle");
+    if(data.result){
+      dispatch({type:'MODIFY_TODO', todo:data.todo});
+      setOutLine(data.todo.completed? "checkmark-circle-outline" :"checkmark-circle");
+    } 
   };
   
   const deleteHandler = async () => {

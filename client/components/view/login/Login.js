@@ -2,7 +2,7 @@ import React,{useState } from 'react';
 import { Text, View, TextInput, Alert} from 'react-native';
 import axios from 'axios';
 import { Entypo } from '@expo/vector-icons';
-import {styles} from './styles';
+import {styles} from '../../style/styles';
 
 const Login = ({navigation }) => {
     const [id, setId] = useState('');
