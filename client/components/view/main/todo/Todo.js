@@ -8,6 +8,7 @@ import axios from 'axios';
 const Todo = ({todo}) => {
   const [outLine,setOutLine] = useState(todo.item.completed ? "checkmark-circle-outline" :"checkmark-circle");
   const {dispatch} = useContext(TodosContext);
+  
   const completedHandler = async () => {
     const {id, desc, due_date} = todo.item;
     const completed = !todo.item.completed;
@@ -26,8 +27,8 @@ const Todo = ({todo}) => {
 
   return (
     <View style={styles.todo} >
-      <Ionicons style={{width:"7%"}}name={outLine} size={24} color="black" onPress={completedHandler}/>
-      <Text style={{position:"absolute", left :"10%"}}>{todo.item.desc}</Text>
+      <Ionicons style={{width:"16%"}}name={outLine} size={40} color="black" onPress={completedHandler}/>
+      <Text style={{position:"absolute", left :"15%"}}>{todo.item.desc}</Text>
       <FontAwesome5 style={{position:"absolute", right:"5%"}} name="trash" size={24} color="black"
         onPress={deleteHandler}
       />

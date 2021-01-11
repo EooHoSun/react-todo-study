@@ -5,10 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {reducer,TodosContext} from './TodoDispatcher';
 import {Input} from './components/view/main/input/Input';
-import {Login} from './components/view/login/Login';
 import {Todos} from './components/view/main/todos/Todos';
 import {Footer} from './components/view/main/footer/Footer';
 import {styles} from './components/style/styles';
+import {Login} from './components/view/login/Login';
+import {Regist} from './components/view/regist/Regist';
 
 
 
@@ -51,6 +52,7 @@ export default function App(){
         <Stack.Navigator>
           <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="AddUser" component={Regist} />
         </Stack.Navigator>
       </NavigationContainer>
       
