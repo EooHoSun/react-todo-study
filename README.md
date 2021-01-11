@@ -1,7 +1,6 @@
 # React-Native , node.js, mongoDB 를 이용한 TODO App
-```markdown
-<iframe width="640" height="360" src="https://youtu.be/_fueSn01lGc" frameborder="0" gesture="media" allowfullscreen=""></iframe>
-```
+영상보기(사진클릭)
+[![시연영상](./썸네일.jpg)](https://youtu.be/_fueSn01lGc)
 
 ## 기술스택
 1. 언어
